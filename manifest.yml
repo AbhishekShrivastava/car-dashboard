@@ -1,20 +1,8 @@
 ---
-declared-services:
-  my-watson-assistant-service:
-    label: conversation
-    plan: free
-  speech-to-text-service:
-    label: speech_to_text
-    plan: standard
-  text-to-speech-service:
-    label: text_to_speech
-    plan: standard
 applications:
-- name: car-dashboard
+- name: multilingual-chatbot-demo
+  random-route: false
+  host: multilingual-chatbot-demo
   command: npm start
   path: .
   memory: 512M
-  services:
-  - my-watson-assistant-service
-  - speech-to-text-service
-  - text-to-speech-service

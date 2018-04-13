@@ -16,15 +16,9 @@
 
 const watson = require('watson-developer-cloud'); // watson sdk
 
+var request = require('request');
+
 // Create the service wrapper
-const conversation = new watson.ConversationV1({
-  // If unspecified here, the ASSISTANT_USERNAME and ASSISTANT_PASSWORD env properties will be checked
-  // After that, the SDK will fall back to the bluemix-provided VCAP_SERVICES environment property
-  username: process.env.ASSISTANT_USERNAME || '<username>',
-  password: process.env.ASSISTANT_PASSWORD || '<password>',
-  url: 'https://gateway.watsonplatform.net/conversation/api/',
-  version_date: '2018-02-16'
-});
 
 /**
  * Updates the response text using the intent confidence
@@ -33,60 +27,68 @@ const conversation = new watson.ConversationV1({
  * @return {Object}          The response with the updated message
  */
 const updateMessage = (input, response) => {
-  var responseText = null;
-  if (!response.output) {
-    response.output = {};
-  } else {
-    return response;
-  }
-  if (response.intents && response.intents[0]) {
-    var intent = response.intents[0];
-    // Depending on the confidence of the response the app can return different messages.
-    // The confidence will vary depending on how well the system is trained. The service will always try to assign
-    // a class/intent to the input. If the confidence is low, then it suggests the service is unsure of the
-    // user's intent . In these cases it is usually best to return a disambiguation message
-    // ('I did not understand your intent, please rephrase your question', etc..)
-    if (intent.confidence >= 0.75) {
-      responseText = 'I understood your intent was ' + intent.intent;
-    } else if (intent.confidence >= 0.5) {
-      responseText = 'I think your intent was ' + intent.intent;
+    var responseText = null;
+    if (!response.output) {
+        response.output = {};
     } else {
-      responseText = 'I did not understand your intent';
+        return response;
     }
-  }
-  response.output.text = responseText;
-  return response;
+    if (response.intents && response.intents[0]) {
+        var intent = response.intents[0];
+        // Depending on the confidence of the response the app can return different messages.
+        // The confidence will vary depending on how well the system is trained. The service will always try to assign
+        // a class/intent to the input. If the confidence is low, then it suggests the service is unsure of the
+        // user's intent . In these cases it is usually best to return a disambiguation message
+        // ('I did not understand your intent, please rephrase your question', etc..)
+        if (intent.confidence >= 0.75) {
+            responseText = 'I understood your intent was ' + intent.intent;
+        } else if (intent.confidence >= 0.5) {
+            responseText = 'I think your intent was ' + intent.intent;
+        } else {
+            responseText = 'I did not understand your intent';
+        }
+    }
+    response.output.text = responseText;
+    return response;
 };
 
 
 module.exports = function(app) {
 
-  app.post('/api/message', (req, res, next) => {
-    const workspace = process.env.WORKSPACE_ID || '<workspace-id>';
-    if (!workspace || workspace === '<workspace-id>') {
-      return res.json({
-        output: {
-          text: 'The app has not been configured with a <b>WORKSPACE_ID</b> environment variable. Please refer to the ' +
-            '<a href="https://github.com/watson-developer-cloud/conversation-simple">README</a> ' +
-            'documentation on how to set this variable. <br>' +
-            'Once a workspace has been defined the intents may be imported from ' +
-            '<a href="https://github.com/watson-developer-cloud/conversation-simple/blob/master/training/car_workspace.json">here</a> ' +
-            'in order to get a working application.'
+    app.post('/api/message', (req, res, next) => {
+        const namespace = process.env.NAMESPACE || '<namespace>';
+        if (!namespace || namespace === '<namespace>') {
+            return res.json({
+                output: {
+                    text: 'The app has not been configured with a <b>NAMESPACE</b> environment variable.'
+                }
+            });
         }
-      });
-    }
-    const payload = {
-      workspace_id: workspace,
-      context: req.body.context || {},
-      input: req.body.input || {}
-    };
+        const payload = {
+            context: req.body.context || {},
+            text: req.body.input.text || {}
+        };
+        payload.context = JSON.stringify( payload.context );
 
-    // Send the input to the conversation service
-    conversation.message(payload, (error, data) => {
-      if (error) {
-        return next(error);
-      }
-      return res.json(updateMessage(payload, data));
+        // hit multilingual chatbot cloud function
+        request.post(
+            `https://openwhisk.ng.bluemix.net/api/v1/web/${namespace}/default/translator.json`,
+            { json: payload },
+            function (error, response, body) {
+                if (error) {
+                    return next(error);
+                }
+                if (body.context) {
+                    body.context = JSON.parse( body.context );
+                }
+                if (body.intents) {
+                    body.intents = JSON.parse( body.intents );
+                }
+                if (body.output) {
+                    body.output = JSON.parse( body.output );
+                }
+                return res.json( updateMessage( payload, body ) );
+            }
+        );
     });
-  });
 };
