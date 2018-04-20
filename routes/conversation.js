@@ -66,10 +66,9 @@ module.exports = function(app) {
         }
         const payload = {
             context: req.body.context || {},
-            text: req.body.input.text || {}
+            text: req.body.input.text || ''
         };
         payload.context = JSON.stringify( payload.context );
-
         // hit multilingual chatbot cloud function
         request.post(
             `https://openwhisk.ng.bluemix.net/api/v1/web/${namespace}/default/translator.json`,

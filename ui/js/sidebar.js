@@ -29,12 +29,11 @@ var Sidebar = (function() {
 
   var suggestions = [
     'Turn on the headlights',
-    'Shut off my lights',
-    'Play some music',
-    'What’s my ETA?',
-    'Show me what’s nearby',
-    'Find a gas station',
-    'Turn my radio up'
+    'Éteignez les phares',
+    'Pon algo de musica',
+    'Prefiero el Jazz',
+    'Wie lange bis wir dort ankommen?',
+    'Alza la musica'
   ];
 
 
