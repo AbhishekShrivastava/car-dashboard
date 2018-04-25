@@ -27,9 +27,12 @@ var request = require('request');
  * @return {Object}          The response with the updated message
  */
 const updateMessage = (input, response) => {
-    var responseText = null;
+    var responseText = null;        
     if (!response.output) {
         response.output = {};
+    } else if (!response.output.text && response.message) {
+        response.output.text = response.message;
+        return response
     } else {
         return response;
     }
