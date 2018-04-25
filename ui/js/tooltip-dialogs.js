@@ -41,7 +41,9 @@ var TooltipDialogs = (function() {
     dialogId: 'welcome-tooltip-dialog',
     // text of the dialog box
     text: 'Hi! I’m Watson. This is a sample application to see how I work. \n\n'
-      + ' For this app, imagine you’re driving and I’m your multilingual co-pilot, here to help however I can.',
+          + ' For this app, imagine you’re driving and I’m your multilingual co-pilot, here to help however I can. \n\n'
+          + 'Currently I can speak Arabic, Chinese (Simplified & Traditional), Dutch, English, French, German, Italian, Japanese, Korean, Polish, Portuguese (Brazil), Russian, Spanish, and Turkish. \n\n'
+          + 'Try clicking the examples in order to see a sample conversation flow.',
     // id of an element to display while this dialog box is active
     showId: null
   }, {

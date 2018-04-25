@@ -110,4 +110,4 @@ var STTModule = (function() {
   }
 })();
 
-STTModule.init(); // Runs Speech to Text Module
+//STTModule.init(); // Runs Speech to Text Module

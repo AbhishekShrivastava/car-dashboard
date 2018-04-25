@@ -107,4 +107,4 @@ var TTSModule = (function() {
     }
   }
 })();
-TTSModule.init(); // Runs Text to Speech Module
+//TTSModule.init(); // Runs Text to Speech Module
