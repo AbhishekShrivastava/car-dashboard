@@ -30,10 +30,13 @@ var Sidebar = (function() {
   var suggestions = [
     'Turn on the headlights',
     'Éteignez les phares',
+    'ワイパーをオンにします。',
+    '바람막이 와이퍼를 끄십시오.',
     'Pon algo de musica',
-    'Prefiero el Jazz',
-    'Wie lange bis wir dort ankommen?',
-    'Alza la musica'
+    'Ich bevorzuge auch Jazzmusik',
+    'I want to navigate somewhere',
+    'Я хочу пойти на АЗС',
+    'Número três por favor'
   ];
 
 
