@@ -1,8 +1,8 @@
 ---
 applications:
-- name: multilingual-chatbot-demo
-  random-route: false
-  host: multilingual-chatbot-demo
-  command: npm start
-  path: .
-  memory: 512M
+  - name: multilingual-chatbot
+    random-route: false
+    host: multilingual-chatbot
+    command: npm start
+    path: .
+    memory: 512M
