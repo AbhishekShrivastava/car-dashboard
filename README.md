@@ -174,7 +174,7 @@ _Note: If you are interested in deploying you local application or the changes y
 
 1 You need to import the app's workspace. To do that, go to the IBM Cloud Dashboard and select the Watson Assistant service instance. Once there, select the **Service Credentials** menu item.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](readme_images/credentials.png)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_images/credentials.png" width="30%">
 
 2 Select **ADD CREDENTIALS**. Name your credentials then select **ADD**.
 
@@ -182,17 +182,17 @@ _Note: If you are interested in deploying you local application or the changes y
 
 4 Download the [exported JSON file](https://raw.githubusercontent.com/watson-developer-cloud/car-dashboard/master/training/car_workspace.json) that contains the Workspace contents.
 
-5 Select **Import**. Browse to (or drag and drop) the JSON file that you downloaded in Step 4. Choose to import **Everything(Intents, Entities, and Dialog)**. Then select **Import** to finish importing the workspace.
+5 Goto **Skills** tab. Click on **Create Skill**. The **Dialog skill** is the default selection. Click on **Next** button at the bottom of the page. On the next page select **Import skill** tab. The **Everything(Intents, Entities, and Dialog)** option is preselected. Select **Choose JSON file** button and local the **car_workspace.json** file.
 
 6 Refresh your browser. A new workspace tile is created within the tooling. Select the _menu_ button within the workspace tile, then select **View details**:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Workpsace Details](readme_images/details.PNG)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/details.png" width="50%">
 
 <a name="workspaceID">
 In the Details UI, copy the 36 character UNID **ID** field. This is the **Workspace ID**.
 </a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ![](readme_images/workspaceid.PNG)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/workspaceid.png" width="50%">
 
 7 Return to your application, either in your local dev environment, or in IBM Cloud. If running on IBM Cloud, you need to [add environment variables](#env).
 
@@ -210,7 +210,9 @@ For more information on workspaces, see the full [Watson Assistant service docum
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](readme_images/env.png)
 
-5 Restart your application.
+5 Add a variable with the name **NAMESPACE**. For the value, type **bx wsk action get translator namespace** on terminal to get the namespace id. Select **SAVE**.
+
+6 Restart your application.
 
 # Troubleshooting in IBM Cloud
 
