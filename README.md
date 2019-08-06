@@ -186,13 +186,13 @@ _Note: If you are interested in deploying you local application or the changes y
 
 6 Refresh your browser. A new workspace tile is created within the tooling. Select the _menu_ button within the workspace tile, then select **View details**:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/details.png" width="50%">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/details.PNG" width="50%">
 
 <a name="workspaceID">
 In the Details UI, copy the 36 character UNID **ID** field. This is the **Workspace ID**.
 </a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/workspaceid.png" width="50%">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/workspaceid.PNG" width="50%">
 
 7 Return to your application, either in your local dev environment, or in IBM Cloud. If running on IBM Cloud, you need to [add environment variables](#env).
 
